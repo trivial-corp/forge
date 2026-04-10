@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Signature Generator - Create Professional Signatures | Trip1 Forge</title>
+<meta name="description" content="Free email signature generator with live preview. Create professional HTML signatures for Gmail, Outlook, and Apple Mail. Multiple styles, custom logos.">
+<meta name="keywords" content="email signature generator, HTML signature, Gmail signature, Outlook signature, free tool">
+<meta property="og:title" content="Email Signature Generator | Trip1 Forge">
+<meta property="og:description" content="Free email signature generator with live preview. Multiple styles, custom logos, one-click copy.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Trip1 Forge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@trip1com">
+<link rel="canonical" href="https://forge.trip1.com/signature.html">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;transition:background .2s,color .2s}
+
+:root{
+  --bg:#F4F5F7;
+  --surface:#fff;
+  --surface2:#F9FAFB;
+  --border:#E5E7EB;
+  --border-subtle:#F0F1F3;
+  --text:#070A14;
+  --text2:#4B5563;
+  --text3:#6B7280;
+  --text4:#B0B5BE;
+  --text5:#8B919A;
+  --accent:#070A14;
+  --accent-hover:#1c1f2e;
+  --input-bg:#F9FAFB;
+  --input-border:#E5E7EB;
+  --prev-bg:#fff;
+  --prev-tag-line:#F0F1F3;
+  --sw-bg:#D1D5DB;
+  --ghost-hover:#F4F5F7;
+  --ghost-border:#E5E7EB;
+  --ghost-text:#6B7280;
+  --ch-text:#B0B5BE;
+  --seg-bg:#F0F1F3;
+  --seg-active:#fff;
+  --seg-active-shadow:0 1px 3px rgba(0,0,0,.1);
+  --radio-border:#D1D5DB;
+  --radio-dot:#070A14;
+}
+[data-theme="dark"]{
+  --bg:#0c0c0f;
+  --surface:#16161a;
+  --surface2:#1a1a1f;
+  --border:#2a2a30;
+  --border-subtle:#222228;
+  --text:#e0e0e6;
+  --text2:#c0c0d0;
+  --text3:#8888a0;
+  --text4:#55556a;
+  --text5:#7070888;
+  --accent:#a855f7;
+  --accent-hover:#9333ea;
+  --input-bg:#1a1a1f;
+  --input-border:#2a2a30;
+  --prev-bg:#1a1a1f;
+  --prev-tag-line:#2a2a30;
+  --sw-bg:#3a3a44;
+  --ghost-hover:#1e1e24;
+  --ghost-border:#2a2a30;
+  --ghost-text:#8888a0;
+  --ch-text:#55556a;
+  --seg-bg:#111115;
+  --seg-active:#1e1e24;
+  --seg-active-shadow:0 1px 3px rgba(0,0,0,.4);
+  --radio-border:#3a3a44;
+  --radio-dot:#a855f7;
+}
+
+.back-btn{display:flex;align-items:center;gap:4px;background:none;border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:4px 10px;color:rgba(255,255,255,.4);font:12px/1 'Inter',sans-serif;cursor:pointer;text-decoration:none;transition:.15s}
+.back-btn:hover{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7)}
+.back-btn svg{width:12px;height:12px}
+.top{background:#070A14;height:48px;display:flex;align-items:center;padding:0 20px;gap:12px}
+.top img{height:16px;filter:brightness(0) invert(1);opacity:.85}
+.top .sep{width:1px;height:14px;background:rgba(255,255,255,.1)}
+.top .lbl{font-size:11px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.35)}
+.top .spacer{flex:1}
+
+.theme-btn{background:none;border:none;cursor:pointer;width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;transition:.15s;color:rgba(255,255,255,.5);padding:0}
+.theme-btn:hover{background:rgba(255,255,255,.08);color:rgba(255,255,255,.85)}
+.theme-btn svg{width:16px;height:16px;flex-shrink:0}
+.icon-sun{display:none}
+.icon-moon{display:block}
+[data-theme="dark"] .icon-sun{display:block}
+[data-theme="dark"] .icon-moon{display:none}
+
+.wrap{max-width:940px;margin:0 auto;padding:28px 16px 80px;display:grid;grid-template-columns:290px 1fr;gap:16px;align-items:start}
+@media(max-width:700px){.wrap{grid-template-columns:1fr}}
+
+.c{background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:background .2s,border-color .2s}
+.c+.c{margin-top:10px}
+.ch{padding:10px 14px;border-bottom:1px solid var(--border-subtle);font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--ch-text);transition:border-color .2s,color .2s}
+.cb{padding:14px}
+
+.f{margin-bottom:10px}.f:last-child{margin-bottom:0}
+.f label{display:block;font-size:11px;font-weight:500;color:var(--text5);margin-bottom:3px;transition:color .2s}
+.f input,.f textarea{
+  width:100%;padding:7px 10px;border:1px solid var(--input-border);border-radius:5px;
+  font:13px/1.4 'Inter',sans-serif;color:var(--text);background:var(--input-bg);
+  outline:none;transition:border .15s,background .2s,color .2s;resize:none;
+}
+.f input:focus,.f textarea:focus{border-color:var(--accent)}
+.f input::placeholder,.f textarea::placeholder{color:var(--text4)}
+.f input[type="url"]{margin-top:6px}
+
+.sw-row{display:flex;align-items:center;justify-content:space-between;height:32px}
+.sw-row span{font-size:12px;color:var(--text2);transition:color .2s}
+.sw{position:relative;width:32px;height:17px;cursor:pointer}
+.sw input{opacity:0;width:0;height:0;position:absolute}
+.sw b{position:absolute;inset:0;background:var(--sw-bg);border-radius:9px;transition:.2s}
+.sw b::after{content:'';position:absolute;top:1.5px;left:1.5px;width:14px;height:14px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 .5px 2px rgba(0,0,0,.1)}
+.sw input:checked+b{background:var(--accent)}
+.sw input:checked+b::after{transform:translateX(15px)}
+
+/* Segmented control for style selector */
+.seg{display:flex;background:var(--seg-bg);border-radius:8px;padding:3px;gap:2px;transition:background .2s}
+.seg-btn{flex:1;padding:5px 4px;border:none;border-radius:5px;font:11px/1 'Inter',sans-serif;font-weight:500;cursor:pointer;color:var(--text3);background:transparent;transition:.15s;text-align:center}
+.seg-btn.active{background:var(--seg-active);color:var(--text);box-shadow:var(--seg-active-shadow)}
+
+/* Radio group for logo */
+.radio-group{display:flex;flex-direction:column;gap:7px}
+.radio-item{display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;color:var(--text2)}
+.radio-item input[type="radio"]{appearance:none;-webkit-appearance:none;width:14px;height:14px;border:1.5px solid var(--radio-border);border-radius:50%;cursor:pointer;position:relative;flex-shrink:0;transition:.15s}
+.radio-item input[type="radio"]:checked{border-color:var(--radio-dot);background:var(--radio-dot)}
+.radio-item input[type="radio"]:checked::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:5px;height:5px;background:#fff;border-radius:50%}
+.custom-url-wrap{margin-top:4px;margin-left:22px}
+.custom-url-wrap input{display:none;width:calc(100% - 22px);padding:6px 9px;border:1px solid var(--input-border);border-radius:5px;font:12px/1.4 'Inter',sans-serif;color:var(--text);background:var(--input-bg);outline:none;transition:border .15s,background .2s,color .2s}
+.custom-url-wrap input:focus{border-color:var(--accent)}
+.custom-url-wrap input::placeholder{color:var(--text4)}
+.custom-url-wrap input.visible{display:block}
+
+.section-gap{margin-top:10px}
+
+.prev-box{padding:28px 24px;background:var(--prev-bg);min-height:100px;transition:background .2s}
+.prev-tag{display:flex;align-items:center;gap:6px;margin-bottom:14px}
+.prev-tag span{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text4)}
+.prev-tag::after{content:'';flex:1;height:1px;background:var(--prev-tag-line)}
+
+.act{display:flex;gap:6px;padding:10px 14px;border-top:1px solid var(--border-subtle);transition:border-color .2s}
+.b{flex:1;padding:8px 12px;border:none;border-radius:7px;font:12.5px/1 'Inter',sans-serif;font-weight:600;cursor:pointer;transition:.15s;display:flex;align-items:center;justify-content:center;gap:5px}
+.b svg{width:13px;height:13px;flex-shrink:0}
+.b1{background:var(--accent);color:#fff}.b1:hover{background:var(--accent-hover)}
+.b2{background:transparent;color:var(--ghost-text);border:1px solid var(--ghost-border)}.b2:hover{background:var(--ghost-hover)}
+
+.help{padding:10px 14px;border-top:1px solid var(--border-subtle);font-size:10px;color:var(--text4);line-height:1.5;transition:border-color .2s,color .2s}
+.help b{color:var(--text5);font-weight:600}
+
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(60px);background:#070A14;color:#fff;padding:7px 14px;border-radius:7px;font-size:11.5px;font-weight:500;opacity:0;transition:.3s cubic-bezier(.16,1,.3,1);pointer-events:none;z-index:99;display:flex;align-items:center;gap:5px;white-space:nowrap}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast svg{width:13px;height:13px;color:#4ADE80;flex-shrink:0}
+
+footer{text-align:center;padding:0 0 28px;font-size:10.5px;color:var(--text4);transition:color .2s}
+footer a{color:var(--text4);text-decoration:none;border-bottom:1px solid var(--border);transition:color .15s,border-color .15s}
+footer a:hover{color:var(--text3);border-color:var(--text3)}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a class="back-btn" href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>Forge</a>
+  <img src="data:image/png;base64,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" alt="trip1">
+  <div class="sep"></div>
+  <span class="lbl">Signature</span>
+  <div class="spacer"></div>
+  <button class="theme-btn" id="themeBtn" title="Toggle dark/light mode" onclick="toggleTheme()">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+  </button>
+</div>
+
+<div style="max-width:940px;margin:0 auto;padding:20px 16px 0">
+  <h1 style="font-size:1.1rem;font-weight:700;color:var(--text);transition:color .2s">Email Signature Generator</h1>
+  <p style="font-size:0.8rem;color:var(--text3);margin-top:2px;transition:color .2s">Create professional HTML signatures for Gmail, Outlook, and Apple Mail</p>
+</div>
+
+<div class="wrap">
+  <div>
+    <div class="c">
+      <div class="ch">Contact</div>
+      <div class="cb">
+        <div class="f"><label>Full Name</label><input id="xName" placeholder="Indiana Jones" oninput="R()"></div>
+        <div class="f"><label>Job Title</label><input id="xTitle" placeholder="Chief Adventure Officer" oninput="R()"></div>
+        <div class="f"><label>Email</label><input id="xEmail" placeholder="indy@trip1.com" oninput="R()"></div>
+        <div class="f"><label>Phone</label><input id="xPhone" placeholder="+1 800 NO SNAKES" oninput="R()"></div>
+        <div class="f"><label>LinkedIn slug</label><input id="xLi" placeholder="dr-jones-belongs-in-a-museum" oninput="R()"></div>
+      </div>
+    </div>
+    <div class="c">
+      <div class="ch">Options</div>
+      <div class="cb">
+        <div class="sw-row"><span>Show tagline</span><label class="sw"><input type="checkbox" id="xTag" checked onchange="R()"><b></b></label></div>
+        <div class="f" id="tagWrap" style="margin-top:6px">
+          <textarea id="xTagTxt" rows="2" oninput="R()">Book 3,000,000+ hotels worldwide -- pay with crypto.</textarea>
+        </div>
+        <div class="sw-row" style="margin-top:2px"><span>Show phone</span><label class="sw"><input type="checkbox" id="xShowPh" checked onchange="R()"><b></b></label></div>
+        <div class="sw-row"><span>Show LinkedIn</span><label class="sw"><input type="checkbox" id="xShowLi" checked onchange="R()"><b></b></label></div>
+
+        <div class="section-gap">
+          <div class="ch" style="margin:0 -14px;padding:10px 14px;border-top:1px solid var(--border-subtle);border-bottom:none;margin-bottom:10px">Style</div>
+          <div class="seg" id="styleSegment">
+            <button class="seg-btn active" data-style="classic" onclick="setStyle('classic',this)">Classic</button>
+            <button class="seg-btn" data-style="compact" onclick="setStyle('compact',this)">Compact</button>
+            <button class="seg-btn" data-style="minimal" onclick="setStyle('minimal',this)">Minimal</button>
+          </div>
+        </div>
+
+        <div class="section-gap">
+          <div class="ch" style="margin:0 -14px;padding:10px 14px;border-top:1px solid var(--border-subtle);border-bottom:none;margin-bottom:10px">Logo</div>
+          <div class="radio-group">
+            <label class="radio-item">
+              <input type="radio" name="xLogo" id="xLogoTrip1" value="trip1" checked onchange="R()">
+              <span>Trip1 (default)</span>
+            </label>
+            <label class="radio-item">
+              <input type="radio" name="xLogo" id="xLogoCustom" value="custom" onchange="R()">
+              <span>Custom URL</span>
+            </label>
+          </div>
+          <div class="custom-url-wrap">
+            <input type="url" id="xLogoUrl" placeholder="https://example.com/logo.png" oninput="R()">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="c">
+      <div class="prev-box">
+        <div class="prev-tag"><span>Preview</span></div>
+        <div id="out"></div>
+      </div>
+      <div class="act">
+        <button class="b b1" onclick="cSig()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy Signature</button>
+        <button class="b b2" onclick="cHTML()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>HTML</button>
+      </div>
+      <div class="help"><b>Gmail</b> Settings &rarr; Signature &middot; <b>Outlook</b> Compose &rarr; Signature &middot; <b>Apple Mail</b> Preferences &rarr; Signatures</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Built by <a href="https://trip1.com?utm_source=forge&amp;utm_medium=tool&amp;utm_campaign=signature" target="_blank">Trip1</a> -- Book 3,000,000+ hotels with crypto
+</footer>
+
+<div class="toast" id="T"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg><span id="Tm"></span></div>
+
+<script>
+const L="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";
+
+let sigStyle='classic';
+
+function g(id){return document.getElementById(id)}
+
+function toggleTheme(){
+  const html=document.documentElement;
+  const isDark=html.getAttribute('data-theme')==='dark';
+  const next=isDark?'light':'dark';
+  html.setAttribute('data-theme',next);
+  localStorage.setItem('trip1-theme',next);
+}
+
+function setStyle(s,btn){
+  sigStyle=s;
+  document.querySelectorAll('.seg-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  R();
+}
+
+function getLogoSrc(){
+  const custom=g('xLogoCustom').checked;
+  const urlInput=g('xLogoUrl');
+  urlInput.classList.toggle('visible',custom);
+  if(custom){
+    const url=urlInput.value.trim();
+    return url||null;
+  }
+  return 'data:image/png;base64,'+L;
+}
+
+function buildClassic(nm,ti,em,ph,li,tag,txt,sPh,sLi,logoSrc){
+  const F="font-family:Inter,Helvetica,Arial,sans-serif;";
+  let rows='';
+  if(sPh&&ph) rows+=`<tr><td style="${F}font-size:13px;color:#6B7280;line-height:20px;padding-top:1px"><a href="tel:${ph.replace(/\s/g,'')}" style="color:#6B7280;text-decoration:none">${ph}</a></td></tr>`;
+  if(sLi&&li) rows+=`<tr><td style="${F}font-size:12px;line-height:18px;padding-top:3px"><a href="https://linkedin.com/in/${li}" style="color:#070A14;text-decoration:none;font-weight:500">LinkedIn &#8599;</a></td></tr>`;
+  if(tag&&txt) rows+=`<tr><td style="padding-top:10px"><p style="margin:0;${F}font-size:11px;color:#9CA3AF;line-height:15px">${txt}</p></td></tr>`;
+
+  const logoCell=logoSrc
+    ?`<td style="vertical-align:top;padding-right:14px"><a href="https://trip1.com" target="_blank" style="text-decoration:none;display:block"><img src="${logoSrc}" width="95" height="33" alt="trip1" style="display:block;border:0"></a></td>`
+    :'';
+  const detailsPadding=logoSrc?'padding-left:14px;border-left:1.5px solid #E5E7EB':'';
+
+  return `<table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;${F}"><tr>`+
+    logoCell+
+    `<td style="vertical-align:top;${detailsPadding}"><table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse">`+
+    `<tr><td style="${F}font-size:15px;font-weight:600;color:#070A14;line-height:20px">${nm}</td></tr>`+
+    `<tr><td style="${F}font-size:13px;color:#6B7280;line-height:20px;padding-top:1px">${ti} &middot; <a href="https://trip1.com" style="color:#070A14;text-decoration:none;font-weight:500">trip1.com</a></td></tr>`+
+    `<tr><td style="${F}font-size:13px;line-height:20px;padding-top:1px"><a href="mailto:${em}" style="color:#6B7280;text-decoration:none">${em}</a></td></tr>`+
+    rows+`</table></td></tr></table>`;
+}
+
+function buildCompact(nm,ti,em,ph,li,tag,txt,sPh,sLi,logoSrc){
+  const F="font-family:Inter,Helvetica,Arial,sans-serif;";
+  let extras='';
+  if(sPh&&ph) extras+=` &middot; <a href="tel:${ph.replace(/\s/g,'')}" style="color:#6B7280;text-decoration:none">${ph}</a>`;
+  if(sLi&&li) extras+=` &middot; <a href="https://linkedin.com/in/${li}" style="color:#070A14;text-decoration:none;font-weight:500">LinkedIn &#8599;</a>`;
+
+  const logoHtml=logoSrc
+    ?`<div style="margin-bottom:6px"><a href="https://trip1.com" target="_blank" style="text-decoration:none;display:inline-block"><img src="${logoSrc}" width="72" height="25" alt="trip1" style="display:block;border:0"></a></div>`
+    :'';
+  const tagHtml=(tag&&txt)?`<div style="${F}font-size:10px;color:#9CA3AF;line-height:14px;margin-top:4px">${txt}</div>`:'';
+
+  return `<div style="${F}font-size:13px;line-height:1.4">`+
+    logoHtml+
+    `<span style="font-weight:600;color:#070A14;font-size:14px">${nm}</span>`+
+    `<span style="color:#9CA3AF;margin:0 5px">/</span>`+
+    `<span style="color:#6B7280">${ti}</span>`+
+    `<div style="margin-top:2px"><a href="mailto:${em}" style="color:#6B7280;text-decoration:none">${em}</a>${extras}</div>`+
+    tagHtml+
+    `</div>`;
+}
+
+function buildMinimal(nm,ti,em,ph,li,tag,txt,sPh,sLi){
+  const F="font-family:Inter,Helvetica,Arial,sans-serif;";
+  let lines='';
+  lines+=`<div style="${F}font-size:14px;font-weight:600;color:#070A14;line-height:1.5">${nm}</div>`;
+  lines+=`<div style="${F}font-size:12px;color:#6B7280;line-height:1.5">${ti} &middot; <a href="https://trip1.com" style="color:#070A14;text-decoration:none;font-weight:500">trip1.com</a></div>`;
+  lines+=`<div style="${F}font-size:12px;color:#6B7280;line-height:1.5"><a href="mailto:${em}" style="color:#6B7280;text-decoration:none">${em}</a></div>`;
+  if(sPh&&ph) lines+=`<div style="${F}font-size:12px;color:#9CA3AF;line-height:1.5"><a href="tel:${ph.replace(/\s/g,'')}" style="color:#9CA3AF;text-decoration:none">${ph}</a></div>`;
+  if(sLi&&li) lines+=`<div style="${F}font-size:12px;line-height:1.5"><a href="https://linkedin.com/in/${li}" style="color:#070A14;text-decoration:none;font-weight:500">LinkedIn &#8599;</a></div>`;
+  if(tag&&txt) lines+=`<div style="${F}font-size:10.5px;color:#9CA3AF;line-height:1.5;margin-top:4px">${txt}</div>`;
+  return `<div>${lines}</div>`;
+}
+
+function R(){
+  const nm=g('xName').value.trim()||'Indiana Jones';
+  const ti=g('xTitle').value.trim()||'Chief Adventure Officer';
+  const em=g('xEmail').value.trim()||'indy@trip1.com';
+  const ph=g('xPhone').value.trim();
+  const li=g('xLi').value.trim();
+  const tag=g('xTag').checked;
+  const txt=g('xTagTxt').value.trim();
+  const sPh=g('xShowPh').checked;
+  const sLi=g('xShowLi').checked;
+  g('tagWrap').style.display=tag?'':'none';
+
+  const logoSrc=getLogoSrc();
+
+  let html='';
+  if(sigStyle==='classic') html=buildClassic(nm,ti,em,ph,li,tag,txt,sPh,sLi,logoSrc);
+  else if(sigStyle==='compact') html=buildCompact(nm,ti,em,ph,li,tag,txt,sPh,sLi,logoSrc);
+  else html=buildMinimal(nm,ti,em,ph,li,tag,txt,sPh,sLi);
+
+  g('out').innerHTML=html;
+}
+
+function toast(m){const t=g('T');g('Tm').textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2000)}
+
+function cSig(){
+  const e=g('out');
+  navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([e.innerHTML],{type:'text/html'}),'text/plain':new Blob([e.innerText],{type:'text/plain'})})]).then(()=>toast('Signature copied')).catch(()=>{const r=document.createRange();r.selectNodeContents(e);const s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges();toast('Signature copied')});
+}
+
+function cHTML(){navigator.clipboard.writeText(g('out').innerHTML).then(()=>toast('HTML copied')).catch(()=>toast('Failed'))}
+
+// Init theme from localStorage
+(function(){
+  const saved=localStorage.getItem('trip1-theme');
+  if(saved==='dark'||(!saved&&window.matchMedia('(prefers-color-scheme: dark)').matches)){
+    document.documentElement.setAttribute('data-theme','dark');
+  }
+})();
+
+R();
+</script>
+</body>
+</html>

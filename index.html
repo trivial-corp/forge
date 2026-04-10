@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip1 Forge - Free Online Tools for Images & Email</title>
+<meta name="description" content="Free browser-based tools by Trip1. Remove watermarks, erase backgrounds, generate email signatures. No signup, no install.">
+<meta name="keywords" content="free online tools, watermark remover, background remover, email signature generator, Trip1">
+<meta property="og:title" content="Trip1 Forge - Free Online Tools">
+<meta property="og:description" content="Free browser-based tools by Trip1. Remove watermarks, erase backgrounds, generate email signatures.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Trip1 Forge">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@trip1com">
+<link rel="canonical" href="https://forge.trip1.com/">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0c0c0f;
+    --surface: #16161a;
+    --surface2: #1a1a1f;
+    --border: #2a2a30;
+    --text: #e0e0e6;
+    --text2: #c0c0d0;
+    --text3: #8888a0;
+    --text4: #5a5a6e;
+    --accent: #a855f7;
+    --accent2: #7c3aed;
+    --card-shadow: 0 4px 24px rgba(0,0,0,0.4);
+    --card-hover-shadow: 0 8px 40px rgba(168,85,247,0.15);
+  }
+  .light {
+    --bg: #F4F5F7;
+    --surface: #ffffff;
+    --surface2: #F9FAFB;
+    --border: #E5E7EB;
+    --text: #070A14;
+    --text2: #4B5563;
+    --text3: #6B7280;
+    --text4: #9CA3AF;
+    --card-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    --card-hover-shadow: 0 8px 40px rgba(168,85,247,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  /* Topbar */
+  .topbar {
+    background: #070A14;
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .topbar-logo {
+    height: 16px;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+  }
+
+  .topbar-sep {
+    width: 1px;
+    height: 14px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .topbar-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .theme-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 6px 8px;
+    cursor: pointer;
+    color: rgba(255,255,255,0.5);
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease;
+  }
+  .theme-btn:hover {
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+  }
+  .theme-btn svg { width: 16px; height: 16px; }
+
+  /* Hero */
+  .hero {
+    text-align: center;
+    padding: 64px 24px 48px;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 14px;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text3);
+    margin-bottom: 20px;
+    transition: background 0.3s, border 0.3s;
+  }
+  .hero-badge .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .hero h1 .gradient {
+    background: linear-gradient(135deg, #a855f7, #6c5ce7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero p {
+    font-size: 1rem;
+    color: var(--text3);
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Grid */
+  .grid {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+  }
+
+  @media (max-width: 500px) {
+    .grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 1.6rem; }
+  }
+
+  /* Card */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.2s ease;
+    box-shadow: var(--card-shadow);
+  }
+  .card:hover {
+    border-color: var(--accent);
+    box-shadow: var(--card-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .card-icon {
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.3s, border 0.3s;
+  }
+
+  .card-icon .icon-wrap {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+
+  .card-icon .icon-wrap svg {
+    width: 28px;
+    height: 28px;
+    color: #fff;
+  }
+
+  .card-icon .icon-purple { background: linear-gradient(135deg, #7c3aed, #a855f7); }
+  .card-icon .icon-blue { background: linear-gradient(135deg, #0ea5e9, #38bdf8); }
+
+  .card-body {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-body h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-body .tag {
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: rgba(168,85,247,0.1);
+    color: #a855f7;
+  }
+
+  .card-body p {
+    font-size: 0.85rem;
+    color: var(--text3);
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .card-body .features {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .card-body .feat {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    transition: background 0.3s, border 0.3s, color 0.3s;
+  }
+
+  .card-open {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    transition: border 0.3s;
+  }
+  .card:hover .card-open { color: var(--accent2); }
+  .card-open svg { width: 14px; height: 14px; transition: transform 0.2s; }
+  .card:hover .card-open svg { transform: translateX(3px); }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 0 24px 40px;
+  }
+
+  .footer-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    transition: border 0.3s;
+  }
+
+  .footer p {
+    font-size: 0.75rem;
+    color: var(--text4);
+    line-height: 1.6;
+  }
+
+  .footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .footer a:hover { text-decoration: underline; }
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 12px;
+  }
+  .socials a {
+    color: var(--text4);
+    transition: color 0.15s;
+    font-weight: 400;
+  }
+  .socials a:hover { color: var(--accent); text-decoration: none; }
+  .socials svg { width: 18px; height: 18px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-left">
+    <img class="topbar-logo" src="data:image/png;base64,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" alt="trip1">
+    <div class="topbar-sep"></div>
+    <span class="topbar-label">Forge</span>
+  </div>
+  <button class="theme-btn" id="themeBtn" title="Toggle theme">
+    <svg id="iconMoon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    <svg id="iconSun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+  </button>
+</div>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge"><span class="dot"></span> Free tools</div>
+  <h1>Trip1 <span class="gradient">Forge</span></h1>
+  <p>Free online tools by Trip1. No installs, no signups, works right in your browser.</p>
+</div>
+
+<!-- App Grid -->
+<div class="grid">
+
+  <!-- Image Tools -->
+  <a class="card" href="image-tools.html">
+    <div class="card-icon">
+      <div class="icon-wrap icon-purple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2>Image Tools <span class="tag">Editor</span></h2>
+      <p>Remove watermarks, erase backgrounds, and clean up photos. Brush, magic wand, and auto-detect tools.</p>
+      <div class="features">
+        <span class="feat">Watermark removal</span>
+        <span class="feat">Background removal</span>
+        <span class="feat">Magic wand</span>
+        <span class="feat">Drag & drop</span>
+      </div>
+    </div>
+    <div class="card-open">
+      Open app
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </a>
+
+  <!-- Email Signature -->
+  <a class="card" href="signature.html">
+    <div class="card-icon">
+      <div class="icon-wrap icon-blue">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </div>
+    </div>
+    <div class="card-body">
+      <h2>Email Signature <span class="tag">Generator</span></h2>
+      <p>Create professional HTML email signatures with live preview. Multiple styles, custom logos, one-click copy.</p>
+      <div class="features">
+        <span class="feat">3 styles</span>
+        <span class="feat">Custom logo</span>
+        <span class="feat">Dark/light mode</span>
+        <span class="feat">Copy to clipboard</span>
+      </div>
+    </div>
+    <div class="card-open">
+      Open app
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </div>
+  </a>
+
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <div class="footer-inner">
+    <p>Built by <a href="https://trip1.com?utm_source=forge&amp;utm_medium=tool&amp;utm_campaign=app-store" target="_blank">Trip1</a> - Book 3,000,000+ hotels worldwide, pay with crypto.</p>
+    <div class="socials">
+      <a href="https://x.com/trip1com" target="_blank" rel="noopener noreferrer" title="X / Twitter">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/trip1com" target="_blank" rel="noopener noreferrer" title="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a href="https://www.facebook.com/trip1com" target="_blank" rel="noopener noreferrer" title="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/trip1" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// Theme toggle
+const html = document.documentElement;
+const btn = document.getElementById('themeBtn');
+const iconMoon = document.getElementById('iconMoon');
+const iconSun = document.getElementById('iconSun');
+
+function setTheme(light) {
+  html.classList.toggle('light', light);
+  iconMoon.style.display = light ? 'none' : 'block';
+  iconSun.style.display = light ? 'block' : 'none';
+  localStorage.setItem('trip1-theme', light ? 'light' : 'dark');
+}
+
+// Init from localStorage
+setTheme(localStorage.getItem('trip1-theme') === 'light');
+
+btn.addEventListener('click', () => {
+  setTheme(!html.classList.contains('light'));
+});
+</script>
+</body>
+</html>
